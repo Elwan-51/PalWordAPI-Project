@@ -46,8 +46,8 @@ class PalView(BaseModel):
     cooling: int
     farming: int
     farming_loot: str
-    day_habitat_img: str
-    night_habitat_img: str
+    day_habitat_img: Optional[str] = None
+    night_habitat_img: Optional[str] = None
 
 
 class PalCreate(BaseModel):
