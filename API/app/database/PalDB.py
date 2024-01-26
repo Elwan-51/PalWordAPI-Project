@@ -9,6 +9,7 @@ class PalDB(Base):
     id = Column(Integer, primary_key=True, unique=True)
     name = Column(String, nullable=False, unique=True)
     partner_skill = Column(String, nullable=True)
+    food = Column(Integer, nullable=False)
     kindling = Column(Integer, nullable=True)
     planting = Column(Integer, nullable=True)
     handwork = Column(Integer, nullable=True)
@@ -33,6 +34,7 @@ class PalView(BaseModel):
     id: int
     name: str
     partner_skill: str
+    food: int
     kindling: int
     planting: int
     handwork: int
@@ -54,6 +56,7 @@ class PalCreate(BaseModel):
     id: Optional[int] = None
     name: str
     partner_skill: Optional[str] = None
+    food: int
     kindling: Optional[int] = 0
     planting: Optional[int] = 0
     handwork: Optional[int] = 0
@@ -75,6 +78,7 @@ class PalUpdate(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
     partner_skill: Optional[str] = None
+    food: Optional[int] = None
     kindling: Optional[int] = None
     planting: Optional[int] = None
     handwork: Optional[int] = None
