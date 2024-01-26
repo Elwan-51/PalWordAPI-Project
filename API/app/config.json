@@ -1,0 +1,12 @@
+{
+  "routers": [
+    "app.router.router_element",
+    "app.router.router_user",
+    "app.router.router_passive_skill",
+    "app.router.router_pal",
+    "app.router.router_pal_element",
+    "app.router.router_pal_complete_user",
+    "app.router.router_pal_owned",
+    "app.router.router_pal_owned_passive_skill"
+  ]
+}
