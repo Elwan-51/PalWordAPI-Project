@@ -47,7 +47,7 @@ class PalView(BaseModel):
     mining: int
     cooling: int
     farming: int
-    farming_loot: str
+    farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
 
