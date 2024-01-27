@@ -39,6 +39,7 @@ class PalOwnedView(BaseModel):
     lucky: bool
     boss: bool
     pal: PalDB.PalView
+    passive_skills: list[PassiveSkillDB.PassiveSkillView]
 
 
 class PalOwnedCreate(BaseModel):
