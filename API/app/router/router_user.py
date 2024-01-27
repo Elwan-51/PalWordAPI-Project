@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import UserDB
+from app.database.v2 import UserDB
 
 
 class RouterUser:

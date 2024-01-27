@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import PalCompleteUserDB, UserDB, PalDB
+from app.database.v2 import PalCompleteUserDB, UserDB, PalDB
 
 
 class RouterPalCompleteUser:
@@ -11,11 +11,15 @@ class RouterPalCompleteUser:
             tags=["PalCompleteUsers"],
             responses={404: {"description": "Not found"}},
         )
-        self.router.add_api_route("", self.get_all_pal_complete_users_view, methods=["GET"], response_model=List[PalCompleteUserDB.PalCompleteUserView])
+        self.router.add_api_route("", self.get_all_pal_complete_users_view, methods=["GET"], response_model=List[
+            PalCompleteUserDB.PalCompleteUserView])
         self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.get_pal_complete_user_by_id_view, methods=["GET"], response_model=PalCompleteUserDB.PalCompleteUserView)
-        self.router.add_api_route("/pal_id/{pal_id}", self.get_pal_complete_user_by_pal_id_view, methods=["GET"], response_model=List[PalCompleteUserDB.PalCompleteUserView])
-        self.router.add_api_route("/user_id/{user_id}", self.get_pal_complete_user_by_user_id_view, methods=["GET"], response_model=List[PalCompleteUserDB.PalCompleteUserView])
-        self.router.add_api_route("/user_id/{user_id}/is_not_complete", self.get_pal_complete_user_by_user_is_not_complete_view, methods=["GET"], response_model=List[PalCompleteUserDB.PalCompleteUserView])
+        self.router.add_api_route("/pal_id/{pal_id}", self.get_pal_complete_user_by_pal_id_view, methods=["GET"], response_model=List[
+            PalCompleteUserDB.PalCompleteUserView])
+        self.router.add_api_route("/user_id/{user_id}", self.get_pal_complete_user_by_user_id_view, methods=["GET"], response_model=List[
+            PalCompleteUserDB.PalCompleteUserView])
+        self.router.add_api_route("/user_id/{user_id}/is_not_complete", self.get_pal_complete_user_by_user_is_not_complete_view, methods=["GET"], response_model=List[
+            PalCompleteUserDB.PalCompleteUserView])
         self.router.add_api_route("", self.post_pal_complete_user_view, methods=["POST"], response_model=PalCompleteUserDB.PalCompleteUserView, status_code=status.HTTP_201_CREATED)
         self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.delete_pal_complete_user_view, methods=["DELETE"], response_model=PalCompleteUserDB.PalCompleteUserView)
         self.router.add_api_route("", self.update_pal_complete_user_view, methods=["PUT"], response_model=PalCompleteUserDB.PalCompleteUserView)
@@ -32,21 +36,24 @@ class RouterPalCompleteUser:
         return pal_complete_user
 
     @staticmethod
-    async def get_pal_complete_user_by_pal_id_view(pal_id: int, db=Depends(get_db)) -> List[PalCompleteUserDB.PalCompleteUserView]:
+    async def get_pal_complete_user_by_pal_id_view(pal_id: int, db=Depends(get_db)) -> List[
+        PalCompleteUserDB.PalCompleteUserView]:
         pal_complete_user = PalCompleteUserDB.get_pal_complete_user_by_pal_id(db, pal_id)
         if pal_complete_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="PalCompleteUser not found")
         return pal_complete_user
 
     @staticmethod
-    async def get_pal_complete_user_by_user_id_view(user_id: int, db=Depends(get_db)) -> List[PalCompleteUserDB.PalCompleteUserView]:
+    async def get_pal_complete_user_by_user_id_view(user_id: int, db=Depends(get_db)) -> List[
+        PalCompleteUserDB.PalCompleteUserView]:
         pal_complete_user = PalCompleteUserDB.get_pal_complete_user_by_user_id(db, user_id)
         if pal_complete_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="PalCompleteUser not found")
         return pal_complete_user
 
     @staticmethod
-    async def get_pal_complete_user_by_user_is_not_complete_view(user_id: int, db=Depends(get_db)) -> List[PalCompleteUserDB.PalCompleteUserView]:
+    async def get_pal_complete_user_by_user_is_not_complete_view(user_id: int, db=Depends(get_db)) -> List[
+        PalCompleteUserDB.PalCompleteUserView]:
         pal_complete_user = PalCompleteUserDB.get_pal_complete_user_by_user_is_not_complete(db, user_id)
         if pal_complete_user is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="PalCompleteUser not found")

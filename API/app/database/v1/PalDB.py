@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 from app.database.connexion import Base, engine
-from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String
 
 
 class PalDB(Base):
@@ -25,7 +25,6 @@ class PalDB(Base):
     farming_loot = Column(String, nullable=True)
     day_habitat_img = Column(String, nullable=True)
     night_habitat_img = Column(String, nullable=True)
-
 
 Base.metadata.create_all(bind=engine)
 
@@ -94,7 +93,6 @@ class PalUpdate(BaseModel):
     farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
-
 
 
 def get_all_pals(db):

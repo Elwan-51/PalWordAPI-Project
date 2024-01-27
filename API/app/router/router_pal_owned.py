@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import PalOwnedDB, UserDB, PalDB
+from app.database.v2 import UserDB, PalDB, PalOwnedDB
 
 
 class RouterPalOwned:
@@ -11,9 +11,11 @@ class RouterPalOwned:
             tags=["PalOwned"],
             responses={404: {"description": "Not found"}},
         )
-        self.router.add_api_route("/user_id/{user_id}", self.get_all_pal_owned_view, methods=["GET"], response_model=List[PalOwnedDB.PalOwnedView])
+        self.router.add_api_route("/user_id/{user_id}", self.get_all_pal_owned_view, methods=["GET"], response_model=List[
+            PalOwnedDB.PalOwnedView])
         self.router.add_api_route("/{pal_owned_id}", self.get_pal_owned_by_id_view, methods=["GET"], response_model=PalOwnedDB.PalOwnedView)
-        self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.get_pal_owned_by_pal_id_view, methods=["GET"], response_model=List[PalOwnedDB.PalOwnedView])
+        self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.get_pal_owned_by_pal_id_view, methods=["GET"], response_model=List[
+            PalOwnedDB.PalOwnedView])
         self.router.add_api_route("", self.post_pal_owned_view, methods=["POST"], response_model=PalOwnedDB.PalOwnedView, status_code=status.HTTP_201_CREATED)
         self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.delete_pal_owned_view, methods=["DELETE"], response_model=PalOwnedDB.PalOwnedView)
         self.router.add_api_route("/user_id/{user_id}", self.update_pal_owned_view, methods=["PUT"], response_model=PalOwnedDB.PalOwnedView)
@@ -30,7 +32,8 @@ class RouterPalOwned:
         return pal_owned
 
     @staticmethod
-    async def get_pal_owned_by_pal_id_view(pal_id: int, user_id: int, db=Depends(get_db)) -> List[PalOwnedDB.PalOwnedView]:
+    async def get_pal_owned_by_pal_id_view(pal_id: int, user_id: int, db=Depends(get_db)) -> List[
+        PalOwnedDB.PalOwnedView]:
         pal_owned = PalOwnedDB.get_pal_owned_by_pal_id(db, pal_id, user_id)
         if pal_owned is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="PalOwned not found")

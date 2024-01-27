@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import PassiveSkillDB
+from app.database.v2 import PassiveSkillDB
 
 
 class RouterPassiveSkill:
@@ -11,7 +11,8 @@ class RouterPassiveSkill:
             tags=["PassiveSkills"],
             responses={404: {"description": "Not found"}},
         )
-        self.router.add_api_route("", self.get_all_passive_skills_view, methods=["GET"], response_model=List[PassiveSkillDB.PassiveSkillView])
+        self.router.add_api_route("", self.get_all_passive_skills_view, methods=["GET"], response_model=List[
+            PassiveSkillDB.PassiveSkillView])
         self.router.add_api_route("/id/{passive_skill_id}", self.get_passive_skill_by_id_view, methods=["GET"], response_model=PassiveSkillDB.PassiveSkillView)
         self.router.add_api_route("/name/{name}", self.get_passive_skill_by_name_view, methods=["GET"], response_model=PassiveSkillDB.PassiveSkillView)
         self.router.add_api_route("", self.post_passive_skill_view, methods=["POST"], response_model=PassiveSkillDB.PassiveSkillView, status_code=status.HTTP_201_CREATED)

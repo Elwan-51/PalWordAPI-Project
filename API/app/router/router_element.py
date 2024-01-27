@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import ElementDB
+from app.database.v2 import ElementDB
+
 
 
 class RouterElement:
@@ -11,7 +12,8 @@ class RouterElement:
             tags=["Elements"],
             responses={404: {"description": "Not found"}},
         )
-        self.router.add_api_route("", self.get_all_elements_view, methods=["GET"], response_model=List[ElementDB.ElementView])
+        self.router.add_api_route("", self.get_all_elements_view, methods=["GET"], response_model=List[
+            ElementDB.ElementView])
         self.router.add_api_route("/id/{element_id}", self.get_element_by_id_view, methods=["GET"], response_model=ElementDB.ElementView)
         self.router.add_api_route("/type/{type_name}", self.get_element_by_type_name_view, methods=["GET"], response_model=ElementDB.ElementView)
         self.router.add_api_route("", self.post_element_view, methods=["POST"], response_model=ElementDB.ElementView, status_code=status.HTTP_201_CREATED)
@@ -32,14 +34,14 @@ class RouterElement:
 
     @staticmethod
     async def get_element_by_type_name_view(type_name: str, db=Depends(get_db)) -> ElementDB.ElementView:
-        element = ElementDB.get_element_by_type_name(db, type_name)
+        element = ElementDB.get_element_by_name(db, type_name)
         if element is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Element not found")
         return element
 
     @staticmethod
     async def post_element_view(element: ElementDB.ElementCreate, db=Depends(get_db)) -> ElementDB.ElementView:
-        if ElementDB.get_element_by_type_name(db, element.type_name) is not None:
+        if ElementDB.get_element_by_name(db, element.name) is not None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Element already exists")
         if ElementDB.get_element_by_id(db, element.id) is not None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Element already exists")

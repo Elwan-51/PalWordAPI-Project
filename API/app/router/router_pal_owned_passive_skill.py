@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database import PalOwnedPassiveSkillDB, PassiveSkillDB, PalOwnedDB
+from app.database.v2 import PassiveSkillDB, PalOwnedDB, PalOwnedPassiveSkillDB
 
 
 class RouterPalOwnedPassiveSkill:
@@ -11,18 +11,22 @@ class RouterPalOwnedPassiveSkill:
             tags=["PalOwnedPassiveSkills"],
             responses={404: {"description": "Not found"}},
         )
-        self.router.add_api_route("/pal_owned_id/{pal_owned_id}", self.get_all_pal_owned_passive_skills_by_pal_owned_id_view, methods=["GET"], response_model=List[PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView])
-        self.router.add_api_route("/passive_skill_id/{passive_skill_id}", self.get_all_pal_owned_passive_skills_by_passive_skill_id_view, methods=["GET"], response_model=List[PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView])
+        self.router.add_api_route("/pal_owned_id/{pal_owned_id}", self.get_all_pal_owned_passive_skills_by_pal_owned_id_view, methods=["GET"], response_model=List[
+            PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView])
+        self.router.add_api_route("/passive_skill_id/{passive_skill_id}", self.get_all_pal_owned_passive_skills_by_passive_skill_id_view, methods=["GET"], response_model=List[
+            PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView])
         self.router.add_api_route("/pal_owned_id/{pal_owned_id}/passive_skill_id/{passive_skill_id}", self.get_pal_owned_passive_skill_by_id_view, methods=["GET"], response_model=PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView)
         self.router.add_api_route("", self.post_pal_owned_passive_skill_view, methods=["POST"], response_model=PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView, status_code=status.HTTP_201_CREATED)
         self.router.add_api_route("/pal_owned_id/{pal_owned_id}/passive_skill_id/{passive_skill_id}", self.delete_pal_owned_passive_skill_view, methods=["DELETE"], response_model=PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView)
 
     @staticmethod
-    async def get_all_pal_owned_passive_skills_by_pal_owned_id_view(pal_owned_id: int, db=Depends(get_db)) -> List[PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView]:
+    async def get_all_pal_owned_passive_skills_by_pal_owned_id_view(pal_owned_id: int, db=Depends(get_db)) -> List[
+        PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView]:
         return PalOwnedPassiveSkillDB.get_all_pal_owned_passive_skills_by_pal_owned_id(db, pal_owned_id)
 
     @staticmethod
-    async def get_all_pal_owned_passive_skills_by_passive_skill_id_view(passive_skill_id: int, db=Depends(get_db)) -> List[PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView]:
+    async def get_all_pal_owned_passive_skills_by_passive_skill_id_view(passive_skill_id: int, db=Depends(get_db)) -> List[
+        PalOwnedPassiveSkillDB.PalOwnedPassiveSkillView]:
         return PalOwnedPassiveSkillDB.get_all_pal_owned_passive_skills_by_passive_skill_id(db, passive_skill_id)
 
     @staticmethod
