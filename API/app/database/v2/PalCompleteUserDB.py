@@ -32,7 +32,7 @@ class PalCompleteUserCreate(BaseModel):
 
 
 class PalCompleteUserUpdate(BaseModel):
-    pal_id: Optional[int] = None
+    pal_id: Optional[str] = None
     user_id: Optional[int] = None
     is_complete: Optional[bool] = None
 
@@ -42,7 +42,7 @@ def get_all_pal_complete_users(db):
 
 
 def get_pal_complete_user_by_id(db, pal_id, user_id):
-    return db.query(PalCompleteUserDB).filter(PalCompleteUserDB.pal_id == pal_id, PalCompleteUserDB.user_id == user_id).first()
+    return db.query(PalCompleteUserDB).filter(PalCompleteUserDB.pal_id == str(pal_id), PalCompleteUserDB.user_id == user_id).first()
 
 
 def get_pal_complete_user_by_pal_id(db, pal_id):
