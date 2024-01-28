@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./discord_app /code/discord_app
 
-CMD [ "python", ".discord_app.main.py" ]
+CMD [ "python", "./discord_app/main.py" ]
