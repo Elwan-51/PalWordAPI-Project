@@ -20,7 +20,7 @@ class RouterPalCompleteUser:
             PalCompleteUserDB.PalCompleteUserView])
         self.router.add_api_route("/user_id/{user_id}/is_not_complete", self.get_pal_complete_user_by_user_is_not_complete_view, methods=["GET"], response_model=List[
             PalCompleteUserDB.PalCompleteUserView])
-        self.router.add_api_route("", self.post_pal_complete_user_view, methods=["POST"], response_model=PalCompleteUserDB.PalCompleteUserView, status_code=status.HTTP_201_CREATED)
+        self.router.add_api_route("", self.post_pal_complete_user_view, methods=["POST"], response_model=PalCompleteUserDB.PalCompleteUserCreate, status_code=status.HTTP_201_CREATED)
         self.router.add_api_route("/pal_id/{pal_id}/user_id/{user_id}", self.delete_pal_complete_user_view, methods=["DELETE"], response_model=PalCompleteUserDB.PalCompleteUserView)
         self.router.add_api_route("", self.update_pal_complete_user_view, methods=["PUT"], response_model=PalCompleteUserDB.PalCompleteUserView)
 
