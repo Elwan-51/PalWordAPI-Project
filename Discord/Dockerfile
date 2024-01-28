@@ -1,11 +1,11 @@
 FROM python:3.12
 
-WORKDIR /code
+WORKDIR /discord_app
 
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt /discord_app/requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./discord_app /code/discord_app
+COPY ./discord_app /discord_app
 
-CMD [ "python", "./discord_app/main.py" ]
+CMD [ "python", "main.py" ]
