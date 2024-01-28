@@ -26,6 +26,7 @@ class PalDB(Base):
     farming_loot = Column(String, nullable=True)
     day_habitat_img = Column(String, nullable=True)
     night_habitat_img = Column(String, nullable=True)
+    pal_img = Column(String, nullable=True)
 
 PalDB.element = relationship("ElementDB", secondary=PalElementDB.PalElementDB.__tablename__)
 
@@ -53,6 +54,7 @@ class PalView(BaseModel):
     farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
+    pal_img: Optional[str] = None
     element: List[ElementDB.ElementView] = []
 
 
@@ -76,6 +78,7 @@ class PalCreate(BaseModel):
     farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
+    pal_img: Optional[str] = None
     elements: List[int] = []
 
 
@@ -99,6 +102,7 @@ class PalUpdate(BaseModel):
     farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
+    pal_img: Optional[str] = None
 
 
 def get_all_pals(db):

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import FileResponse
 from typing import List
 from app.database.connexion import get_db
 from app.database.v2 import ElementDB
@@ -63,6 +64,8 @@ class RouterElement:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Element not found")
         element_db = ElementDB.update_element(db, element.id, element)
         return element_db
+
+
 
 
 def initialize(app):
