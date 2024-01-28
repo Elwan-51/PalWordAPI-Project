@@ -54,7 +54,7 @@ def get_pal_complete_user_by_user_id(db, user_id):
 
 
 def get_pal_complete_user_by_user_is_not_complete(db, user_id):
-    return db.query(PalCompleteUserDB).filter(PalCompleteUserDB.user_id == user_id, PalCompleteUserDB.is_complete == False).all()
+    return db.query(PalCompleteUserDB).filter(PalCompleteUserDB.user_id == user_id, PalCompleteUserDB.is_complete == False).order_by(PalCompleteUserDB.pal_id.asc()).all()
 
 
 def post_pal_complete_user(db, pal_complete_user: PalCompleteUserCreate):
