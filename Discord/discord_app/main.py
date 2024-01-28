@@ -340,4 +340,4 @@ async def reset_account(ctx):
 
 
 # Bot startup
-bot.run(os.getenv('TOKEN', 'MTA4OTE4OTYyMDM4Mzc2NDUyMg.GSc5V2.cZzeRJEaGav4NGykbookOifDU0XhZdkdbm_55Q'))
+bot.run(os.getenv('TOKEN', 'API'))
