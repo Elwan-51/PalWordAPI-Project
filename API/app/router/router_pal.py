@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from app.database.connexion import get_db
-from app.database.v2 import PalDB
+from app.database.v2 import PalDB, PalElementDB
 
 
 class RouterPal:
@@ -74,7 +74,11 @@ class RouterPal:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Pal already exists")
         if PalDB.get_pal_by_id(db, pal.id) is not None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Pal already exists")
+
         pal_db = PalDB.post_pal(db, pal)
+        for element in pal.elements:
+            if PalElementDB.get_pal_element_by_id(db, pal.id, element) is None:
+                PalElementDB.post_pal_element(db, PalElementDB.PalElementCreate(pal_id=pal.id, element_id=element))
         return pal_db
 
     @staticmethod

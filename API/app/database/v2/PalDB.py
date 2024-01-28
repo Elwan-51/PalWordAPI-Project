@@ -76,6 +76,7 @@ class PalCreate(BaseModel):
     farming_loot: Optional[str] = None
     day_habitat_img: Optional[str] = None
     night_habitat_img: Optional[str] = None
+    elements: List[int] = []
 
 
 class PalUpdate(BaseModel):
@@ -129,7 +130,7 @@ def get_pal_by_work_range(db, work, min, max):
 
 
 def post_pal(db, pal: PalCreate):
-    db_pal = PalDB(**pal.model_dump(exclude_unset=True))
+    db_pal = PalDB(**pal.model_dump(exclude_unset=True, exclude={"elements"}))
     db.add(db_pal)
     db.commit()
     db.refresh(db_pal)
