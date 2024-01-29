@@ -2,12 +2,12 @@ import discord
 from discord.ext import commands
 import logging
 import os
-from discord_app.passive_skill import PassiveSkill
-from discord_app.pal import Pal
-from discord_app.elements import Elements
-from discord_app.user import User
-from discord_app.paldex import Paldex
-from discord_app.core.Embed import EmbedMultiplePage
+from passive_skill import PassiveSkill
+from pal import Pal
+from elements import Elements
+from user import User
+from paldex import Paldex
+from core.Embed import EmbedMultiplePage
 
 
 

@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import requests
-from discord_app.core.Embed import EmbedMultiplePage
+from core.Embed import EmbedMultiplePage
 
 class CheckEmbed(EmbedMultiplePage):
     def __init__(self, ctx, pages, url, user_id,files_path=None):

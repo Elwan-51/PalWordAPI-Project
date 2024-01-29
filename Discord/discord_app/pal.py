@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 import os
 from enum import Enum
-from discord_app.core.Embed import EmbedMultiplePage
+from core.Embed import EmbedMultiplePage
 
 
 class WorkAbility(Enum):
