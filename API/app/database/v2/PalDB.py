@@ -110,7 +110,8 @@ def get_all_pals(db):
 
 
 def get_pal_by_id(db, pal_id):
-    return db.query(PalDB).filter(PalDB.id == pal_id).options(joinedload(PalDB.element)).first()
+    print(pal_id, type(pal_id))
+    return db.query(PalDB).filter(PalDB.id == str(pal_id)).options(joinedload(PalDB.element)).first()
 
 
 def get_pal_by_name(db, name):

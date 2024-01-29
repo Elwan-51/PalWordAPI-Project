@@ -1,8 +1,5 @@
-import asyncio
-
 import discord
-from discord.ext import tasks, commands
-import requests
+from discord.ext import commands
 import logging
 import os
 from discord_app.passive_skill import PassiveSkill
